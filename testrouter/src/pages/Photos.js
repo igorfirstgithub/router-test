@@ -9,7 +9,7 @@ function Photos() {
   //  console.log(allPhotos);
 
   const allToImage = allPhotos.map((photo, index) => (
-    <Image key={photo.id} url={photo.url} className={getClass(index)} />
+    <Image key={photo.id} img={photo} className={getClass(index)} />
   ));
 
   // Get the allPhotos array from context

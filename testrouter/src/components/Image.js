@@ -17,12 +17,12 @@ function Image(props) {
         alt={`#${props.img.id}`}
       />
 
-      {hovered && (
+      {(hovered || props.img.isFavorite) && (
         <i
           onClick={() => toggleIsFavorite(props.img.id)}
           className="ri-heart-line favorite"
         >
-          Hrt
+          {props.img.isFavorite ? "Heart" : "Hrt"}
         </i>
       )}
       {hovered && <i className="ri-add-circle-line cart">Bsk</i>}

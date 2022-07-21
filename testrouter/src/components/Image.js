@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 
 function Image({ className, img }) {
   const [hovered, setHovered] = React.useState(false);
-  const [carted, setCarted] = React.useState(false);
-  const { toggleIsFavorite, addRemToCart } = useContext(Context);
+  //const [carted, setCarted] = React.useState(false); // useless because reinits after every render
+  const { toggleIsFavorite, addRemToCart, cartItems } = useContext(Context);
+
+  let isInCart = cartItems.find((el) => el.id === img.id) ? true : false;
 
   return (
     <div
@@ -23,15 +25,16 @@ function Image({ className, img }) {
           {img.isFavorite ? "Heart" : "Hrt"}
         </i>
       )}
-      {(hovered || carted) && (
+
+      {(hovered || isInCart) && (
         <i
           onClick={() => {
             addRemToCart(img);
-            setCarted((prevCart) => !prevCart);
+            //setCarted((prevCart) => !prevCart);
           }}
           className="ri-add-circle-line cart"
         >
-          {carted ? "BSK" : "Bsk"}
+          {isInCart ? "BSK" : "Bsk"}
         </i>
       )}
     </div>

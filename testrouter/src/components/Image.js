@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 
 function Image({ className, img }) {
   const [hovered, setHovered] = React.useState(false);
-  const { toggleIsFavorite } = useContext(Context);
+  const [carted, setCarted] = React.useState(false);
+  const { toggleIsFavorite, addRemToCart } = useContext(Context);
 
   return (
     <div
@@ -22,7 +23,17 @@ function Image({ className, img }) {
           {img.isFavorite ? "Heart" : "Hrt"}
         </i>
       )}
-      {hovered && <i className="ri-add-circle-line cart">Bsk</i>}
+      {(hovered || carted) && (
+        <i
+          onClick={() => {
+            addRemToCart(img);
+            setCarted((prevCart) => !prevCart);
+          }}
+          className="ri-add-circle-line cart"
+        >
+          {carted ? "BSK" : "Bsk"}
+        </i>
+      )}
     </div>
   );
 }

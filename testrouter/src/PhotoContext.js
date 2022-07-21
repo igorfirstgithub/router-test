@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 const Context = React.createContext();
 
 function ContextProvider(props) {
-  const [allPhotos, setAllPhotos] = useState([1, 2]);
+  const [allPhotos, setAllPhotos] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   function toggleIsFavorite(id) {
     setAllPhotos((prevPhotos) =>
@@ -11,7 +12,26 @@ function ContextProvider(props) {
         photo.id === id ? { ...photo, isFavorite: !photo.isFavorite } : photo
       )
     );
-    console.log(allPhotos);
+    //console.log(allPhotos);
+  }
+
+  function addRemToCart(item) {
+    if (cartItems.find((elem) => elem.id === item.id)) {
+      /*let tempCart = [];               // imperative way to remove item from the cart
+      for (let i = 0; i < cartItems.length; i++) {
+        if (cartItems[i].id !== item.id) {
+          tempCart.push(cartItems[i]);
+        }
+      }
+      setCartItems(tempCart);
+      */
+
+      // declarative way to remove item from the cart
+      setCartItems((prevCart) => prevCart.filter((el) => el.id !== item.id));
+    } else {
+      setCartItems((prevItems) => prevItems.concat(item));
+    }
+    console.log(cartItems);
   }
 
   const url =
@@ -24,7 +44,7 @@ function ContextProvider(props) {
   }, []);
 
   return (
-    <Context.Provider value={{ allPhotos, toggleIsFavorite }}>
+    <Context.Provider value={{ allPhotos, toggleIsFavorite, addRemToCart }}>
       {props.children}
     </Context.Provider>
   );

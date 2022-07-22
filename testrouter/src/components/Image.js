@@ -22,7 +22,7 @@ function Image({ className, img }) {
           onClick={() => toggleIsFavorite(img.id)}
           className="ri-heart-line favorite"
         >
-          {img.isFavorite ? "Heart" : "Hrt"}
+          {img.isFavorite ? "HRT" : "Hrt"}
         </i>
       )}
 

@@ -34,6 +34,10 @@ function ContextProvider(props) {
     console.log(cartItems);
   }
 
+  function emptyingCart() {
+    setCartItems([]);
+  }
+
   const url =
     "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json";
 
@@ -45,7 +49,13 @@ function ContextProvider(props) {
 
   return (
     <Context.Provider
-      value={{ allPhotos, toggleIsFavorite, addRemToCart, cartItems }}
+      value={{
+        allPhotos,
+        toggleIsFavorite,
+        addRemToCart,
+        cartItems,
+        emptyingCart,
+      }}
     >
       {props.children}
     </Context.Provider>
